@@ -15,6 +15,8 @@ function App() {
   const handleImg =(e)=>{
     const imgSrc = e.target.files
     setImgMulter(imgSrc[0])
+
+    // images base 64 convart
     
     let reader = new FileReader();
 
@@ -26,9 +28,9 @@ function App() {
   }
 
   // handle button click
-   const handleClick =async()=>{
-    console.log(input);
-    console.log(images);
+   const handleClick =()=>{
+    console.log('handle button click');
+    // console.log(images);
     // const myImg =async()=>{
     //   await axios.post("http://localhost:8000/images",{
     //     images:images
@@ -50,8 +52,16 @@ function App() {
        },
      }
      
-     let response = await axios.request(reqOptions)
-     console.log(response.data);
+     axios.request(reqOptions)
+     .then((res)=>{
+      console.log(res.data);
+      console.log('data ase ');
+     })
+     .catch((err)=>{
+      console.log(err);
+      console.log('data nai');
+     })
+    //  console.log(images);
    }
 
   return (
@@ -59,6 +69,7 @@ function App() {
       <input className='ring ring-blue-950' type="text" value={input} onChange={(e)=>setInput(e.target.value)} />
       <input name='imgUplod' onChange={handleImg} type="file"  />
       <button onClick={handleClick} className='py-2 px-4 bg-blue-900 text-white rounded-md'>Uplod</button>
+      <img src="http://localhost:8000/profile/img.jpg" alt="img" />
     </>
   )
 }
